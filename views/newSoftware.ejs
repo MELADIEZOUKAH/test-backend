@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include('./partials/head',{mytitle:"library controll"}) %>
+
+<body>
+    <%- include('./partials/header') %>
+
+    <main id="main">
+        <section class="newbook">
+            <h1>تنزيل كتاب</h1>
+            <form action="/Software" method="POST">                
+                
+                <label for="name">أدخل إسم البرنامج</label>
+                <input class="form-control" id="name" type="text" name="name" required maxlength="15">
+
+                <label for="path_software">رابط البرنامج</label>
+                <input class="form-control" id="path_software" type="url" name="path_software" required>
+
+                <label for="path_img">رابط صورة البرنامج</label>
+                <input class="form-control" id="path_img" type="url" name="path_img" required>
+
+                <label for="discription">وصف البرنامج</label>
+                <textarea class="form-control form-control-software" id="discription" name="discription" required></textarea>
+
+                <button type="submit" class="btn btn-primary btn-sm create">تنزيل البرنامج</button>
+            </form>
+        </section>
+    </main>
+    <%- include('./partials/footer') %>
+</body>
+</html>

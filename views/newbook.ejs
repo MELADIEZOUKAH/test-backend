@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include('./partials/head',{mytitle:"library controll"}) %>
+
+<body>
+    <%- include('./partials/header') %>
+
+    <main id="main">
+        <section class="newbook">
+            <h1>تنزيل كتاب</h1>
+            <form action="/books" method="POST">
+                <label for="number">إختر القسم:</label>
+                <select class="form-select" required id="number" name="number">
+                    <option value=""></option>
+                    <option value="0">القسم العام</option>
+                    <option value="1">قسم الكهربائية</option>
+                    <option value="2">قسم الميكانيكية</option>
+                    <option value="3">قسم المعمارية</option>
+                    <option value="4">قسم المدنية</option>
+                    <option value="5">قسم الكيميائية و النفطية</option>
+                </select>
+                
+                <label for="name">أدخل إسم الكتاب</label>
+                <input class="form-control" id="name" type="text" name="name" required maxlength="15">
+
+                <label for="url">رابط الكتاب</label>
+                <input class="form-control" id="url" type="url" name="url" required>
+
+                <label for="img">رابط الصورة</label>
+                <input class="form-control" id="img" type="url" name="img" required>
+
+                <label for="name_book">إسم المؤلف</label>
+                <input class="form-control" id="name_book" type="text" name="name_book" maxlength="15" >
+                
+                <label for="article_code">رمز المقرر</label>
+                <input class="form-control" id="article_code" type="text" name="article_code" maxlength="7" >
+
+                <label for="discription">وصف الكتاب</label>
+                <textarea class="form-control" id="discription" name="discription" ></textarea>
+
+                <button type="submit" class="btn btn-primary btn-sm create" style="margin-top:10px;">تنزيل الكتاب</button>
+            </form>
+        </section>
+    </main>
+    <img src="../upload/1680988561271++.png"/>
+    <%- include('./partials/footer') %>
+</body>
+</html>

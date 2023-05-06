@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include('./partials/head',{mytitle:"library controll"}) %>
+
+<body>
+    <%- include('./partials/header') %>
+
+    <main id="main">
+        <section class="newbook">
+            <h1>حذف كتاب</h1>
+            <form action="/books/delete" method="DELETE">
+
+                <label for="name">أدخل إسم الكتاب</label>
+                <input class="form-control" id="name" type="text" name="name" required>
+
+                <button type="reset" class="btn btn-primary btn-sm create" style="margin-top:10px;">تنزيل الكتاب</button>
+            </form>
+        </section>
+        <section >
+            <form>
+                <input type="text" onkeyup="sendData(this)" placeholder="Enter name book">
+                <div  id="searchResult">
+                </div>
+            </form>
+        </section>
+    </main>
+    
+    <% Data.forEach(element => { %>
+       <div> 
+        <%element.name%>
+     </div> 
+    <% }) %>
+
+    <%- include('./partials/footer') %>
+
+    <script>
+        const SearchResult = document.getElementById('searchResult');
+        SearchResult.style.display = 'none';
+        function sendData(e){
+            const SearchResult = document.getElementById('searchResult');
+            let match1 = e.value.match(/^[a-zA-Z]*/);
+            let match2 = e.value.match(/\s*/);
+            if(match2[0] == e.value) {
+                SearchResult.style.display = 'none';
+                SearchResult.innerHTML = '';
+                return;
+            }
+            if(match1[0] === e.value ){
+                SearchResult.style.display = 'block';
+                fetch('/books/delete/GetDataFromSearch',{
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body : JSON.stringify({search : e.value})
+            })
+            .then( res => res.json())
+            .then( res => {
+                let data = res.search;
+                if(data.length == 0){
+                    SearchResult.innerHTML = "<p>No data found.</p>";
+                    return;
+                }
+                async function getID(e){
+                    
+                }
+                // console.log(data);
+                SearchResult.innerHTML = '';
+                data.forEach((element,index) => {
+                    if(index > 0) SearchResult.innerHTML += "<hr/>";
+                    SearchResult.innerHTML += 
+                    `
+                    <div class="data" >
+                        <div style="display:flex;">
+                            <img src=${element.img} alt='No connection' />
+                            <div>${element.name} </div>
+                        </div>
+                        <span onclick=${getID(this)}> ${element._id}</span>
+                    </div>
+                     `;
+                    return;
+                });
+            })
+            }
+        }
+    </script>
+</body>
+</html>
